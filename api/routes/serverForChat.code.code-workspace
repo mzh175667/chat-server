@@ -1,0 +1,17 @@
+{
+  "folders": [
+    {
+      "name": "middleware",
+      "path": "..\\..\\..\\practiceForBackend\\middleware"
+    },
+    {
+      "name": "service",
+      "path": "..\\..\\..\\practiceForBackend\\service"
+    },
+    {
+      "name": "serverForChat",
+      "path": "..\\.."
+    }
+  ],
+  "settings": {}
+}
