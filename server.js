@@ -51,19 +51,19 @@ io.on("connection", (socket) => {
       });
     }
   );
+  socket.on("sendDataForSeen", ({ forSeen, receiverId }) => {
+    const ForSeen = getUser(receiverId);
+    io.to(ForSeen.socketId).emit("getDataForSeen", {
+      forSeen,
+    });
+  });
   socket.on("sendNotificationForFollowers", ({ senderName, receiverId }) => {
     const followNotification = getUser(receiverId);
     io.to(followNotification?.socketId).emit("getNotificationForFollowers", {
       senderName,
     });
   });
-  socket.on("sendDataForSeen", ({ forSeen, receiverId }) => {
-    console.log("forSeen", forSeen);
-    const ForSeen = getUser(receiverId);
-    io.to(ForSeen?.socketId).emit("getDataForSeen", {
-      forSeen,
-    });
-  });
+
   socket.on("showingLastMessage", ({ conversation }) => {
     io.emit("getLastMessage", {
       conversation,
