@@ -1,4 +1,5 @@
 const port = process.env.PORT || 5000;
+const { findByIdAndUpdate } = require("./api/model/student");
 const app = require("./App");
 const server = require("http").createServer(app);
 
@@ -12,6 +13,7 @@ let users = [];
 const addUser = (userId, socketId) => {
   !users.some((user) => user?.userId === userId) &&
     users.push({ userId, socketId });
+  // const user = findByIdAndUpdate()
 };
 const removeUser = (socketId) => {
   users = users.filter((user) => user.socketId !== socketId);
@@ -53,9 +55,11 @@ io.on("connection", (socket) => {
   );
   socket.on("sendDataForSeen", ({ forSeen, receiverId }) => {
     const ForSeen = getUser(receiverId);
-    io.to(ForSeen.socketId).emit("getDataForSeen", {
-      forSeen,
-    });
+    if (ForSeen && ForSeen.socketId) {
+      io.to(ForSeen.socketId).emit("getDataForSeen", {
+        forSeen,
+      });
+    }
   });
   socket.on("sendNotificationForFollowers", ({ senderName, receiverId }) => {
     const followNotification = getUser(receiverId);

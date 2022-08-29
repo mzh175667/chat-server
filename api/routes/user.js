@@ -104,7 +104,7 @@ router.post("/login", (req, res, next) => {
 router.get("/", (req, res, next) => {
   User.find()
     .then((result) => {
-      console.log(result);
+      // console.log(result);
       res.status(200).json({
         userData: result,
       });
