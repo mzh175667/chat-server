@@ -68,6 +68,7 @@ router.put("/unfollow", verify_auth, (req, res) => {
         .then((result) => {
           res.status(200).json({
             result: result,
+            success: true,
           });
         })
         .catch((err) => {
